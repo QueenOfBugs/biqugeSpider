@@ -5,7 +5,6 @@ from biqugePro.items import NovelItem, ChapterItem
 import re
 
 
-
 class BiqugeSpider(CrawlSpider):
     name = 'biquge'
     id = 1

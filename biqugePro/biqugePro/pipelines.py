@@ -7,7 +7,6 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import pymysql
-
 def clean_data(item):
     for k in item.keys():
         item[k] = str(item[k]).replace('\'','').replace('\"','')
