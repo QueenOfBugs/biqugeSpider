@@ -1,16 +1,17 @@
-import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from biqugePro.items import NovelItem, ChapterItem
 import re
+from scrapy_redis.spiders import RedisCrawlSpider
 
 
-class BiqugeSpider(CrawlSpider):
+class BiqugeSpider(RedisCrawlSpider):
     name = 'biquge'
     id = 1
     #  allowed_domains = ['https://www.biquge.info/paihangbang_allvisit/1.html']
-    start_urls = ['https://www.biquge.info/paihangbang_allvisit/1.html']
+    #  start_urls = ['https://www.biquge.info/paihangbang_allvisit/1.html']
     # 解析分页url的链接提取器
+    redis_key = 'biquge'
     le_pages = LinkExtractor(restrict_xpaths=('//div[@id="pagelink"]/a'))
     # 解析详情页url的链接提取器
     le_detail = LinkExtractor(restrict_xpaths=(
@@ -53,17 +54,17 @@ class BiqugeSpider(CrawlSpider):
     def parse_content(self, response):
         # 章节页面,选择直接存html文本到数据库
         novel_id = response.request.url.split('/')[-2]
-        #  chapter_id = response.request.url.split('/')[-1].split('.')[0]
+        chapter_id = response.request.url.split('/')[-1].split('.')[0]
         novel_content_div = response.xpath('//div[@id="content"]').get()
         pattern = r'<div id=\"content\">(.*)<\/div>'
         chapter_content = re.findall(
             pattern, novel_content_div, re.MULTILINE | re.DOTALL)[0]
-        chapter_title = response.xpath('//div[@class="bookname"]/h1/text()').get()
+        chapter_title = response.xpath(
+            '//div[@class="bookname"]/h1/text()').get()
         item = ChapterItem()
         item['novel_id'] = novel_id
         item['chapter_title'] = chapter_title
         item['chapter_content'] = chapter_content
-        item['chapter_id'] = self.id
-        self.id +=1
+        item['chapter_id'] = novel_id + chapter_id
         item['url'] = response.request.url
         return item

@@ -57,7 +57,7 @@ class BiqugeproPipeline:
             chapter_sql = '''
             insert into chapter(title, novel_id, content_id)
             values(
-            '{}','{}',{}
+            '{}','{}','{}'
             )
             '''.format(
                 item['chapter_title'],
@@ -68,6 +68,7 @@ class BiqugeproPipeline:
             try:
                 self.cursor.execute(chapter_sql)
                 self.connect.commit()
+                #  print(item)
             except Exception as e:
                 print(e)
                 print(item['url'])
@@ -77,7 +78,7 @@ class BiqugeproPipeline:
             content_sql = '''
             insert into content(id,content)
             values(
-            {},'{}'
+            '{}','{}'
             )
             '''.format(item['chapter_id'], item['chapter_content'])
             try:
@@ -87,6 +88,6 @@ class BiqugeproPipeline:
                 self.log_wrong_url(item['url'],e)
                 print(e)
                 print(item['url'])
-                #  print(content_sql)
+                print(content_sql)
                 self.connect.rollback()
         return item
