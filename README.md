@@ -3,6 +3,9 @@
 
 ## 数据库设计:
 
+> 数据库表设计文件:spider.sql,进入mysql后用source执行sql文件
+
+
 **小说表:** novel
 | Field      | Type         | Null | Key | Default | 描述       |
 |------------|--------------|------|-----|---------|------------|
@@ -118,11 +121,11 @@ redis_key = 'biquge'  #作为可以被共享的调度器名称
 
 **TODO**
 
-- [O]  全站数据爬取
+- [X]  全站数据爬取
     - [X] 数据库:
         - [X]  数据库设计
         - [X]  数据库实现
-    - [o] 爬虫代码:
+    - [X] 爬虫代码:
         - [X]  spider:爬虫入口，数据解析，url提取
     - [X] 搭建分布式:https://www.cnblogs.com/bugs-killer/p/14682591.html
     
