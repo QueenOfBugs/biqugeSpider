@@ -57,7 +57,7 @@
 ### 记录爬取url的数据指纹
 `scrapy crawl spider -s JOBDIR=./jobs/001`
 
-## 改为分布式:
+## 改为分布式思路:
 
 分布式就是搭建分布式机群对同一组资源进行分布联合爬取
 
@@ -110,15 +110,20 @@ redis_key = 'biquge'  #作为可以被共享的调度器名称
         - `lpush *** start_url`
 - 抓取到的数据存储在redis的ProName:items的数据结构中
 
+## 分布式实际操作:
+
+- 租用服务器:
+    - 记录下ip地址，密码。
+
 
 **TODO**
 
-- [o]  全站数据爬取
+- [O]  全站数据爬取
     - [X] 数据库:
         - [X]  数据库设计
         - [X]  数据库实现
     - [o] 爬虫代码:
         - [X]  spider:爬虫入口，数据解析，url提取
-    - [ ] 搭建分布式
+    - [X] 搭建分布式:https://www.cnblogs.com/bugs-killer/p/14682591.html
     
     

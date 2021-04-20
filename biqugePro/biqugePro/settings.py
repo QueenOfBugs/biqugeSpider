@@ -88,6 +88,8 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+REDIS_HOST = '198.13.46.22'
+REDIS_PORT = 6379
 ITEM_PIPELINES = {'biqugePro.pipelines.BiqugeproPipeline': 300,
                   #  'scrapy_redis.pipelines.RedisPipeline': 400
                   }
