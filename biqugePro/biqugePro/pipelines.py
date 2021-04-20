@@ -21,7 +21,7 @@ class BiqugeproPipeline:
         self.fp = open('fail_urls', 'a')
         self.connect = pymysql.Connect(
             #  host='127.0.0.1', port=3306, user='root', password='kamisama', db='spider'
-            host='198.13.46.22', port=3306, user='root', password='kamisama', db='spider'
+            host='198.13.46.22', port=3306, user='root', password='password', db='spider'
         )
         self.cursor = self.connect.cursor()
 
